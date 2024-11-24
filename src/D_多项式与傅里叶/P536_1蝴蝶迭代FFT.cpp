@@ -2,46 +2,85 @@
 using namespace std;
 /**
  * @Name 快速傅里叶变换(FFT)
- * @Change 使用了蝴蝶操作，提取公共因子
  * @Input 输入：一个多项式系数向量a(a0,a1,...,an)
- * @Output 输出：结果值系数向量y(a0,a1,...,yn)
+ * @Output 输出：结果值向量y(a0,a1,...,yn)
  */
 const double PI = 3.14159265358979323846;
-
-// FFT 实现
-void FFFT(vector<complex<double>>& a) {
-
-    int n = a.size();
-    if (n <= 1) return;
-    // 分离偶数和奇数
-    std::vector<std::complex<double>> a_even(n / 2);
-    std::vector<std::complex<double>> a_odd(n / 2);
-    for (int i = 0; i < n / 2; ++i) {
-        a_even[i] = a[i * 2];
-        a_odd[i] = a[i * 2 + 1];
+const double E = 2.71828182845904523536;
+void ffft(vector<complex<double>>& x) {
+    // 填充设置为2^n长度
+    int N = x.size();
+    int N2 = 1;
+    bool ngood = false;
+    for(int i = 0; i <= 12 && N2 <= N; i++){
+        N2 = pow(2,i);
+        if(N==N2){
+            ngood = true;
+            break;
+        }
     }
-    // 递归计算 FFT
-    FFFT(a_even);
-    FFFT(a_odd);
-    // 组合结果
-    for (int k = 0; k < n / 2; ++k) {
-        std::complex<double> t = std::polar(1.0, -2 * PI * k / n) * a_odd[k];
-        a[k] = a_even[k] + t;
-        a[k + n / 2] = a_even[k] - t;
+    int Ncha = N2 - N;
+    for(int i = 0; i < Ncha; i++){
+        x.push_back({0.0,0.0});
+    }
+    N = N2;
+    // 位反转排序
+    int logN = log2(N);
+    vector<complex<double>> temp(N);
+    for (int i = 0; i < N; i++) {
+        int j = 0;
+        for (int bit = 0; bit < logN; bit++) {
+            if (i & (1 << bit)) {
+                j |= (1 << (logN - 1 - bit));
+            }
+        }
+        temp[j] = x[i];
+    }
+    x = temp;
+
+    // 蝴蝶操作
+    for (int len = 2; len <= N; len *= 2) {
+        double angle = -2 * PI / len;
+        complex<double> wlen(cos(angle), sin(angle));
+
+        for (int i = 0; i < N; i += len) {
+            complex<double> w(1);
+            for (int j = 0; j < len / 2; j++) {
+                complex<double> u = x[i + j];
+                complex<double> v = x[i + j + len / 2] * w;
+
+                x[i + j] = u + v;   // 蝴蝶操作
+                x[i + j + len / 2] = u - v; // 蝴蝶操作
+                w *= wlen; // 更新旋转因子
+            }
+        }
     }
 }
 
 int main() {
-    // 示例输入
-    std::vector<std::complex<double>> a = {
-        {0, 0}, {1, 0}, {2, 0}, {3, 0}
+    // 示例：计算8个点的FFT
+    vector<complex<double>> data = {
+        {1.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0}
     };
-    // 计算 FFT
-    FFFT(a);
-    // 输出结果
-    std::cout << "FFT Result:" << std::endl;
-    for (const auto& x : a) {
-        std::cout << x << std::endl;
+
+    cout << "Input Data:\n";
+    for (const auto& c : data) {
+        cout << c << "\n";
     }
+
+    ffft(data);
+
+    cout << "\nFFT Result:\n";
+    for (const auto& c : data) {
+        cout << c << "\n";
+    }
+
     return 0;
 }
