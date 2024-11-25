@@ -1,6 +1,9 @@
 #include <vector>
 #include <queue>
 #include <iostream>
+/**
+ * @Name 广度优先搜索BFS，可用于无权图的最短路径求解。
+ */
 
 void bfsMatrix(const std::vector<std::vector<int>>& matrix, std::vector<bool>& visited, std::vector<int>& result, int node) {
     std::queue<int> q;
