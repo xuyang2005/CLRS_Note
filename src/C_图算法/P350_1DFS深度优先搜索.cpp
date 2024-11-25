@@ -31,7 +31,8 @@ vector<bool>& visited,vector<int>& result, int node) {
 }
 
 // 用于邻接链表的深度优先搜索
-vector<int> dfsList(const vector<list<int>>& adjList, vector<bool>& visited, int node) {
+vector<int> dfsList(const vector<list<int>>& adjList,
+ vector<bool>& visited, int node) {
     visited[node] = true; // 标记当前节点为已访问
     result.push_back(node);
     for (int neighbor : adjList[node]) {

@@ -116,6 +116,8 @@
     "gleam": "gleam run -m $fileNameWithoutExt"
   },
   "files.associations": {
-    "vector": "cpp"
+    "vector": "cpp",
+    "iosfwd": "cpp",
+    "ios": "cpp"
   }
 }
