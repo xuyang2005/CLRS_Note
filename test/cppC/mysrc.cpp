@@ -1,3 +1,17 @@
+/* 
+ Author: 徐洋
+ Result: TLE	Submission_id: 7023671
+ Created at: Tue Nov 26 2024 10:50:28 GMT+0800 (China Standard Time)
+ Problem_id: 8806	Time: 1120	Memory: 3844
+*/
+
+/* 
+ Author: 徐洋
+ Result: TLE	Submission_id: 7023364
+ Created at: Tue Nov 26 2024 01:22:11 GMT+0800 (China Standard Time)
+ Problem_id: 8806	Time: 1144	Memory: 4120
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long lint;
@@ -6,13 +20,10 @@ const int INF = 0x7f7f7f7f;
 int main() {
     ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     int n;
-    vector<lint> bp;
-    vector<bool> b;
+   
     cin >> n;
-    for(int i = 0; i <= n; i++){
-        bp.push_back(0);
-        b.push_back(false);
-    }
+    vector<lint> bp(n+1,0);
+    vector<bool> b(n+1,0);
     int m;
     cin >> m;
     int l,r;

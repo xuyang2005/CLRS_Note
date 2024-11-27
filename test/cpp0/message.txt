@@ -1,1 +1,2 @@
 g++ -o zBin.exe mysrc.cpp && zBin.exe <myin.txt >myout.txt
+./exe.out <myin.txt >myout.txt

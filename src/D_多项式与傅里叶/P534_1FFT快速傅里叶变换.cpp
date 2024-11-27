@@ -36,7 +36,7 @@ void FFT(vector<complex<double>>& a) {
 int main() {
     // 示例输入{0, 0}, {1, 0}, {2, 0}, {3, 0}
     std::vector<std::complex<double>> a = {
-        {0, 0}, {1, 0}, {2, 0}, {3, 0}
+        {1, 0}, {1, 0}, {-1, 0}, {2, 0}, {1,0},{0,0},{-1,0},{1,0}
     };
     // 计算 FFT
     FFT(a);
