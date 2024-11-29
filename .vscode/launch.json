@@ -6,9 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "terminal": "integrated",
-      "cwd": "/Users/mac/vscode/clrs_note/CLRS_Note",
-      "program": "/Users/mac/vscode/clrs_note/CLRS_Note/build/Debug/outDebug"
+      "cwd": "/Users/mac/vscode/clrs_note/CLRS_Note/test/cpp0",
+      "program": "/Users/mac/vscode/clrs_note/CLRS_Note/test/cpp0/build/Debug/outDebug"
     }
   ]
 }

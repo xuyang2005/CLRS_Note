@@ -2,7 +2,10 @@
 using namespace std;
 
 const int INF = 0x7f7f7f7f;
+typedef long long lint;
 
-int main() {int T;cin >> T;for (int i = 0; i < T; i++) {
+int main() {
     //主函数
-}return 0;}
+    lint 
+    return 0;
+}
